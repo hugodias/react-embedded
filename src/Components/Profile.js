@@ -24,7 +24,7 @@ const Profile = props => (
       allowHalf
       disabled
       value={props.rate}
-      style={{ marginTop: 20 }}
+      style={{ width: 140, margin: "20px auto 0", display: "block" }}
     />
   </Card>
 );

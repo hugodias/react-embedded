@@ -4,6 +4,7 @@ import "./Builder.css";
 import { Icon, Row, Col } from "antd";
 import { Input, Select, Rate, Form, Button } from "antd";
 import Profile from "../../Components/Profile";
+import Header from "../../Components/Header";
 const FormItem = Form.Item;
 
 class Builder extends Component {
@@ -39,8 +40,9 @@ class Builder extends Component {
 
     return (
       <div className="Builder">
+        <Header />
         <Row>
-          <Col span={6} offset={6}>
+          <Col span={6} offset={5}>
             <Profile {...form} />
           </Col>
           <Col offset={1} span={8}>
