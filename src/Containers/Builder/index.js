@@ -2,9 +2,10 @@ import React, { Component } from "react";
 
 import "./Builder.css";
 import { Icon, Row, Col } from "antd";
-import { Input, Select, Rate, Form, Button, Modal, Spin } from "antd";
+import { Input, Select, Rate, Form, Button, Modal, Spin, Avatar } from "antd";
 import Profile from "../../Components/Profile";
 import Header from "../../Components/Header";
+import AvatarChooser from "../../Components/AvatarChooser";
 import fire from "../../fire";
 const FormItem = Form.Item;
 
@@ -23,7 +24,7 @@ class Builder extends Component {
     };
 
     this.handleFieldChange = this.handleFieldChange.bind(this);
-    this.saveProfile = this.saveProfile.bind(this);
+    this.handleCreateEmbeddedCode = this.handleCreateEmbeddedCode.bind(this);
   }
 
   handleFieldChange = field => event => {
@@ -33,7 +34,7 @@ class Builder extends Component {
     this.setState({ form, loading: false });
   };
 
-  saveProfile = e => {
+  handleCreateEmbeddedCode = e => {
     const { form, key } = this.state;
     this.setState({ loading: true });
     const ref = fire
@@ -84,9 +85,11 @@ class Builder extends Component {
                 />
               </FormItem>
 
+              <AvatarChooser />
+
               <Button.Group size="large">
-                <Button type="primary" onClick={this.saveProfile}>
-                  Next<Icon type="right" />
+                <Button type="primary" onClick={this.handleCreateEmbeddedCode}>
+                  Generate embedded code<Icon type="right" />
                 </Button>
               </Button.Group>
             </Form>
