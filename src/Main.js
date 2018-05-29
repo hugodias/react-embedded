@@ -7,7 +7,7 @@ const Main = () => (
   <main>
     <Switch>
       <Route exact path='/' component={Builder}/>
-      <Route path="/embedded/:id" component={Embedded}/>
+      <Route path="/profile/:id" component={Embedded}/>
     </Switch>
   </main>
 )
