@@ -100,7 +100,7 @@ class Builder extends Component {
               <Spin spinning={this.state.loading}>
                 <pre
                   style={{ width: "100%", border: "1px solid #777" }}
-                >{`<iframe src="https://localhost:3000/embedded/${
+                >{`<iframe src="https://embedded-40bb4.firebaseapp.com/embedded/${
                   this.state.key
                 }" border="0"></iframe>`}</pre>
               </Spin>
