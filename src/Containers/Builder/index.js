@@ -9,6 +9,25 @@ import AvatarChooser from "../../Components/AvatarChooser";
 import fire from "../../fire";
 const FormItem = Form.Item;
 
+const AvatarList = [
+  {
+    name: "U",
+    color: "#f56a00"
+  },
+  {
+    name: "Lucy",
+    color: "#7265e6"
+  },
+  {
+    name: "Tom",
+    color: "#ffbf00"
+  },
+  {
+    name: "Edward",
+    color: "#00a2ae"
+  }
+];
+
 class Builder extends Component {
   constructor(props) {
     super(props);
@@ -85,7 +104,7 @@ class Builder extends Component {
                 />
               </FormItem>
 
-              <AvatarChooser />
+              <AvatarChooser options={AvatarList} />
 
               <Button.Group size="large">
                 <Button type="primary" onClick={this.handleCreateEmbeddedCode}>
