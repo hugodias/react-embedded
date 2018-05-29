@@ -2,16 +2,19 @@ import React, { Component } from "react";
 
 import "./Builder.css";
 import { Icon, Row, Col } from "antd";
-import { Input, Select, Rate, Form, Button } from "antd";
+import { Input, Select, Rate, Form, Button, Modal, Spin } from "antd";
 import Profile from "../../Components/Profile";
 import Header from "../../Components/Header";
+import fire from "../../fire";
 const FormItem = Form.Item;
 
 class Builder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      loading: false,
+      modalVisible: false,
+      key: null,
       form: {
         name: "hugo",
         website: "github.io/hugodias",
@@ -20,6 +23,7 @@ class Builder extends Component {
     };
 
     this.handleFieldChange = this.handleFieldChange.bind(this);
+    this.saveProfile = this.saveProfile.bind(this);
   }
 
   handleFieldChange = field => event => {
@@ -27,6 +31,16 @@ class Builder extends Component {
     const value = event.target ? event.target.value : event;
     form[field] = value;
     this.setState({ form, loading: false });
+  };
+
+  saveProfile = e => {
+    const { form, key } = this.state;
+    this.setState({ loading: true });
+    const ref = fire
+      .database()
+      .ref("embedded")
+      .push(form);
+    this.setState({ loading: false, modalVisible: true, key: ref.key });
   };
 
   render() {
@@ -71,11 +85,26 @@ class Builder extends Component {
               </FormItem>
 
               <Button.Group size="large">
-                <Button type="primary">
+                <Button type="primary" onClick={this.saveProfile}>
                   Next<Icon type="right" />
                 </Button>
               </Button.Group>
             </Form>
+            <Modal
+              title="Copy your embedded code"
+              wrapClassName="vertical-center-modal"
+              visible={this.state.modalVisible}
+              onOk={() => this.setState({ modalVisible: false })}
+              onCancel={() => this.setState({ modalVisible: false })}
+            >
+              <Spin spinning={this.state.loading}>
+                <pre
+                  style={{ width: "100%", border: "1px solid #777" }}
+                >{`<iframe src="https://localhost:3000/embedded/${
+                  this.state.key
+                }" border="0"></iframe>`}</pre>
+              </Spin>
+            </Modal>
           </Col>
         </Row>
       </div>
